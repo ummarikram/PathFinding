@@ -14,4 +14,5 @@ The A* search algorithm visualization using the power of C++ & OpenGL.
 
 * After this point, you can change the start/end points using their respective keys and the algorithm will adapt to these changes.
 
+![Image of A*](https://github.com/ummarikram/PathFinding/blob/master/Run.gif)
 
