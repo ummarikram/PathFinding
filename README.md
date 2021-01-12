@@ -22,3 +22,5 @@ The A* & dijkstra search algorithm visualization using the power of C++ & OpenGL
 
 * GLM [https://github.com/g-truc/glm]
 
+* FREETYPE [https://github.com/ubawurinna/freetype-windows-binaries]
+
