@@ -1,8 +1,8 @@
 # PATH FINDING
 
-The A* search algorithm visualization using the power of C++ & OpenGL.
+The A* & dijkstra search algorithm visualization using the power of C++ & OpenGL.
 
-# INSTRUCTIONS
+## INSTRUCTIONS
 
 * Use the 'S' KEY to select/deselect a start point (Green Block) and the 'E' KEY to select/deselect an end point (Red Block).
 
@@ -10,9 +10,15 @@ The A* search algorithm visualization using the power of C++ & OpenGL.
 
 * After selecting the start and end points, simply press the 'Enter' KEY to see the algorithm work.
 
-* The shortest path is represented by the Yellow line.
+* The shortest path is represented by the Yellow line and the visited nodes with light blue colour.
 
 * After this point, you can change the start/end points using their respective keys and the algorithm will adapt to these changes.
 
-![Image of A*](https://github.com/ummarikram/PathFinding/blob/master/Run.gif)
+## DEPENDENCIES
+
+* GLFW [https://github.com/glfw/glfw]
+
+* GLEW [https://github.com/nigels-com/glew]
+
+* GLM [https://github.com/g-truc/glm]
 
