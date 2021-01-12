@@ -2,6 +2,15 @@
 
 The A* & dijkstra search algorithm visualization using the power of C++ & OpenGL.
 
+### MENU
+![Image of Menu](https://github.com/ummarikram/PathFinding/blob/master/Gifs/Menu.gif)
+
+### A* 
+![Image of A-Star](https://github.com/ummarikram/PathFinding/blob/master/Gifs/A-Star.gif)
+
+### DIJKSTRA
+![Image of Dijkstra](https://github.com/ummarikram/PathFinding/blob/master/Gifs/Dijkstra.gif)
+
 ## INSTRUCTIONS
 
 * Use the 'S' KEY to select/deselect a start point (Green Block) and the 'E' KEY to select/deselect an end point (Red Block).
