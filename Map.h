@@ -4,12 +4,13 @@ bool LeftMousePressed = false;
 bool SKeyPressed = false;
 bool EKeyPressed = false;
 bool StartPathfinding = false;
+bool QuitApp = false;
 
 class Map
 {
 private:
 
-    const int size = 20, Rows = 24, Cols = 43;
+    const int size = 20, Rows = round(Screen_Height * 0.0336), Cols = round(Screen_Width * 0.0336);
     Point Scale;
     Point Cursor;
     Node* Nodes;
@@ -56,9 +57,8 @@ public:
             }
         }
 
-        SetChoice(0, "A* SEARCH", 150.0f, 720 - 580);
-        SetChoice(1, "DIJKSTRA", 950.0f, 720 - 580);
-
+        SetChoice(0, "A* SEARCH", Screen_Width * 0.15, Screen_Height * 0.20);
+        SetChoice(1, "DIJKSTRA", Screen_Width * 0.75, Screen_Height * 0.20);
     }
 
     void ResetKeys()
@@ -467,16 +467,19 @@ public:
 
     static void KeyboardCallBack(GLFWwindow* window, int Key, int scancode, int action, int mods)
     {
+        if (Key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        {
+            QuitApp = true;
+        }
+
         if (Key == GLFW_KEY_S && action == GLFW_PRESS)
         {
             SKeyPressed = true;
-
         }
 
         if (Key == GLFW_KEY_E && action == GLFW_PRESS)
         {
             EKeyPressed = true;
-
         }
 
         if (Key == GLFW_KEY_ENTER && action == GLFW_PRESS)

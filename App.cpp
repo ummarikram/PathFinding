@@ -1,6 +1,3 @@
-#define Screen_Width 1280
-#define Screen_Height 710
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
@@ -9,6 +6,13 @@
 #include <vector>
 #include <iostream>
 #include <list>
+
+int Get_Width() { return glfwGetVideoMode(glfwGetPrimaryMonitor())->width; }
+int Get_Height() { return glfwGetVideoMode(glfwGetPrimaryMonitor())->height; }
+
+#define Screen_Width Get_Width()
+#define Screen_Height Get_Height()
+
 #include "Shader.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -38,6 +42,7 @@ int main(int argc, char** argv)
 
     glfwSetMouseButtonCallback(window, World.mouseButtonCallBack);
     glfwSetCursorPosCallback(window, World.cursorPositionCallBack);
+    glfwSetKeyCallback(window, World.KeyboardCallBack);
 
     // Shader reading
     Shader shader("Shaders/vs.shader", "Shaders/fs.shader");
@@ -46,7 +51,7 @@ int main(int argc, char** argv)
     BindText(shader);
 
     // Loop until choice is selected OR window is not closed
-    while (World.GetSelectedAlgorithm() == 0 && !glfwWindowShouldClose(window))
+    while (World.GetSelectedAlgorithm() == 0 && !glfwWindowShouldClose(window) && !QuitApp)
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
@@ -75,14 +80,12 @@ int main(int argc, char** argv)
         /* Poll for and process events */
         glfwPollEvents();
 
-
     }
 
     // Destroy window
     glfwDestroyWindow(window);
 
-
-    if (World.GetSelectedAlgorithm() != 0)
+    if (World.GetSelectedAlgorithm() != 0 && !QuitApp)
     {
         World.ResetKeys();
 
@@ -94,7 +97,7 @@ int main(int argc, char** argv)
 
         
         /* Loop until the user closes the window */
-        while (!glfwWindowShouldClose(window))
+        while (!glfwWindowShouldClose(window) && !QuitApp)
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);

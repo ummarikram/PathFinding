@@ -6,10 +6,8 @@ int GLInit(GLFWwindow*& window)
     if (!glfwInit())
         return -1;
 
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(Screen_Width, Screen_Height, "Path Finding", NULL, NULL);
+    window = glfwCreateWindow(Screen_Width, Screen_Height, "Path Finding", glfwGetPrimaryMonitor(), NULL);
 
     if (!window)
     {
@@ -19,7 +17,4 @@ int GLInit(GLFWwindow*& window)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
-
-    // Start window at center
-    glfwSetWindowPos(window, Screen_Width / 20, Screen_Height / 20);
 }
