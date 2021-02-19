@@ -6,9 +6,9 @@ struct Point
     float x, y;
     int length;
 
-    Point()
+    Point(float X = 0.0f, float Y = 0.0f)
     {
-        x = 0.0f; y = 0.0f; length = 0;
+        x = X; y = Y; length = 0;
     }
 
     void SetLength(int length)
