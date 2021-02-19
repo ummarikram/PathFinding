@@ -13,7 +13,7 @@ The A* & dijkstra search algorithm visualization using the power of C++ & OpenGL
 
 ## INSTRUCTIONS
 
-* Use the 'S' KEY to select/deselect a start point (Green Block) and the 'E' KEY to select/deselect an end point (Red Block).
+* Use the 's' KEY to select/deselect a start point (Green Block) and the 'e' KEY to select/deselect an end point (Red Block).
 
 * You can also add obstacles (Blue Block) by using the left mouse button.
 
