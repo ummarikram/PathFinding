@@ -271,11 +271,13 @@ public:
 
     bool CheckBlockCollision(float Px, float Py, int& Index)
     {
+        float ScaleFactor = float(Screen_Width) / float(1280);
+
         for (int itr = 0; itr < 2; itr++)
         {
             // if collides
-            if (Px >= Choices[itr].x && Px <= Choices[itr].x + Choices[itr].length * 14.5
-                && Py >= Choices[itr].y - 20 && Py <= Choices[itr].y)
+            if (Px >= Choices[itr].x && Px <= Choices[itr].x + (Choices[itr].length * 14.5 * ScaleFactor)
+                && Py >= Choices[itr].y - (20 * ScaleFactor) && Py <= Choices[itr].y)
             {
                 Index = itr + 1;
                 return false;
