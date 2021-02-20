@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <list>
+#include <queue>
 
 int Get_Width() { return glfwGetVideoMode(glfwGetPrimaryMonitor())->width; }
 int Get_Height() { return glfwGetVideoMode(glfwGetPrimaryMonitor())->height; }
