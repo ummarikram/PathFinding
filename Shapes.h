@@ -89,3 +89,12 @@ public:
     }
 };
 
+// To compare two Nodes
+class myComparator
+{
+public:
+    int operator() (const Node* lhs, const Node* rhs)
+    { 
+        return lhs->GlobalGoal > rhs->GlobalGoal;
+    }
+};
