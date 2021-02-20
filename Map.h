@@ -53,6 +53,16 @@ public:
                     Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y + 0) * Rows + (x - 1)]);
                 if (x < Rows - 1)
                     Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y + 0) * Rows + (x + 1)]);
+                
+                 // For Connecting Diagonally
+                /*if (y > 0 && x > 0)
+                    Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y - 1) * Rows + (x - 1)]);
+                if (y < Cols - 1 && x>0)
+                    Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y + 1) * Rows + (x - 1)]);
+                if (y > 0 && x < Rows - 1)                       
+                    Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y - 1) * Rows + (x + 1)]);
+                if (y < Cols - 1 && x < Rows - 1)
+                    Nodes[y * Rows + x].Neighbours.push_back(&Nodes[(y + 1) * Rows + (x + 1)]);*/
 
             }
         }
