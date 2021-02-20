@@ -86,6 +86,7 @@ public:
         Clicked = false;
         Visited = false;
         Parent = nullptr;
+        Neighbours.reserve(8); // Maximum Neighbours for a Node (Diagonally)
     }
 };
 
