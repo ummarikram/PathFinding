@@ -84,7 +84,7 @@ public:
 
     void FindPath()
     {
-        // Reset Navigation Graph - default all node states
+        // Reset Navigation Graph 
         for (int x = 0; x < Rows * Cols; x++)
         {
             Nodes[x].Visited = false;
@@ -98,28 +98,81 @@ public:
         Node* nodeCurrent = Start;
         Start->LocalGoal = 0.0f;
         Start->GlobalGoal = distance(Start, End);
-
-        // Add start node to not tested list - this will ensure it gets tested.
-        // As the algorithm progresses, newly discovered nodes get added to this
-        // list, and will themselves be tested later
+        
+        //// Priority Queue Implementation
+            
+        //std::priority_queue<Node*, std::deque<Node*>, myComparator> NotTestedNodes;
+        //NotTestedNodes.push(Start);
+     
+        //// if the not tested list contains node, Find absolutely shortest path
+        //while (!NotTestedNodes.empty() && nodeCurrent != End)
+        //{
+        //    // Front of NotTestedNodes is potentially the lowest distance node. Our
+        //    // list may also contain nodes that have been visited, so pop them
+        //    while (!NotTestedNodes.empty() && NotTestedNodes.top()->Visited)
+        //        NotTestedNodes.pop();
+        //
+        //    // break if there are no valid nodes left to test
+        //    if (NotTestedNodes.empty())
+        //        break;
+        //
+        //    nodeCurrent = NotTestedNodes.top();
+        //    nodeCurrent->Visited = true; // We only explore a node once
+        //
+        //
+        //    // Check each of this node's neighbours
+        //    for (auto nodeNeighbour : nodeCurrent->Neighbours)
+        //    {
+        //        // if the neighbour is not visited and is not an obstacle,
+        //        // add it to NotTested List
+        //        if (!nodeNeighbour->Visited && nodeNeighbour->Obstacle == 0)
+        //            NotTestedNodes.push(nodeNeighbour);
+        //
+        //        // Calculate the neighbours potential lowest parent distance
+        //        float fPossiblyLowerGoal = nodeCurrent->LocalGoal + distance(nodeCurrent, nodeNeighbour);
+        //
+        //        // If choosing to path through this node is a lower distance than what 
+        //        // the neighbour currently has set, update the neighbour to use this node
+        //        // as the path source
+        //        if (fPossiblyLowerGoal < nodeNeighbour->LocalGoal)
+        //        {
+        //            nodeNeighbour->Parent = nodeCurrent;
+        //            nodeNeighbour->LocalGoal = fPossiblyLowerGoal;
+        //
+        //
+        //            // A-Star -> We add Heuristic
+        //            if (GetSelectedAlgorithm() == 1)
+        //            {
+        //                nodeNeighbour->GlobalGoal = nodeNeighbour->LocalGoal + distance(nodeNeighbour, End);
+        //            }
+        //
+        //            // Dijktra - > We dont add Heuristic
+        //            else if (GetSelectedAlgorithm() == 2)
+        //            {
+        //                nodeNeighbour->GlobalGoal = nodeNeighbour->LocalGoal;
+        //            }
+        //        }
+        //    }
+        //}
+        
+        // Doubly Linked List Implementation
+        
+        // Add start node to not tested list
         std::list<Node*> listNotTestedNodes;
         listNotTestedNodes.push_back(Start);
 
         // if the not tested list contains nodes, there may be better paths
-        // which have not yet been explored. However, we will also stop 
-        // searching when we reach the target - there may well be better
-        // paths but this one will do - it wont be the longest.
-        while (!listNotTestedNodes.empty() && nodeCurrent != End)// Find absolutely shortest path // && nodeCurrent != nodeEnd)
+        while (!listNotTestedNodes.empty() && nodeCurrent != End)
         {
             // Sort Untested nodes by global goal, so lowest is first
             listNotTestedNodes.sort([](const Node* lhs, const Node* rhs) { return lhs->GlobalGoal < rhs->GlobalGoal; });
 
             // Front of listNotTestedNodes is potentially the lowest distance node. Our
-            // list may also contain nodes that have been visited, so ditch these...
+            // list may also contain nodes that have been visited, so remove these
             while (!listNotTestedNodes.empty() && listNotTestedNodes.front()->Visited)
                 listNotTestedNodes.pop_front();
 
-            // ...or abort because there are no valid nodes left to test
+            // break if there are no valid nodes left to test
             if (listNotTestedNodes.empty())
                 break;
 
@@ -127,11 +180,10 @@ public:
             nodeCurrent->Visited = true; // We only explore a node once
 
 
-            // Check each of this node's neighbours...
+            // Check each of this node's neighbours
             for (auto nodeNeighbour : nodeCurrent->Neighbours)
             {
-                // ... and only if the neighbour is not visited and is 
-                // not an obstacle, add it to NotTested List
+                // if the neighbour is not visited and is not an obstacle, add it to NotTested List
                 if (!nodeNeighbour->Visited && nodeNeighbour->Obstacle == 0)
                     listNotTestedNodes.push_back(nodeNeighbour);
 
@@ -146,17 +198,12 @@ public:
                     nodeNeighbour->Parent = nodeCurrent;
                     nodeNeighbour->LocalGoal = fPossiblyLowerGoal;
 
-                    // The best path length to the neighbour being tested has changed, so
-                    // update the neighbour's score. The heuristic is used to globally bias
-                    // the path algorithm, so it knows if its getting better or worse. At some
-                    // point the algo will realise this path is worse and abandon it, and then go
-                    // and search along the next best path.
-
+                    // A* Star -> Add Heuristic
                     if (GetSelectedAlgorithm() == 1)
                     {
                         nodeNeighbour->GlobalGoal = nodeNeighbour->LocalGoal + distance(nodeNeighbour, End);
                     }
-
+                    // Dijkstra -> Dont Add Heuristic
                     else if (GetSelectedAlgorithm() == 2)
                     {
                         nodeNeighbour->GlobalGoal = nodeNeighbour->LocalGoal;
